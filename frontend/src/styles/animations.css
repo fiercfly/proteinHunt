@@ -1,0 +1,183 @@
+/* ============================================================
+   ANIMATIONS.CSS — All keyframes + animation utilities
+   Import this in global.css or App.js
+   ============================================================ */
+
+/* ── Keyframes ───────────────────────────────────────────────────────────── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0);     }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+@keyframes scaleInBounce {
+  0%   { opacity: 0; transform: scale(0.88); }
+  70%  { opacity: 1; transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1);    }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0);      }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+/* Ticker scroll — must use exactly 50% content for seamless loop */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0%   { background-position: -250% 0; }
+  100% { background-position:  250% 0; }
+}
+
+/* Live dot pulse */
+@keyframes pulseDot {
+  0%, 100% { opacity: 1;   transform: scale(1);   }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+
+/* Vote button bounce */
+@keyframes voteBounce {
+  0%   { transform: scale(1);    }
+  40%  { transform: scale(1.28); }
+  70%  { transform: scale(0.92); }
+  100% { transform: scale(1);    }
+}
+
+/* Shake — used for error states */
+@keyframes shake {
+  0%, 100% { transform: translateX(0);   }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px);  }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px);  }
+}
+
+/* Spin — loading indicator */
+@keyframes spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+/* Card entrance — used for feed items */
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* Fire flicker — for logo / featured badge */
+@keyframes flicker {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  33%       { opacity: 0.9; transform: scale(1.05); }
+  66%       { opacity: 1;   transform: scale(0.97); }
+}
+
+/* ── Animation utility classes ───────────────────────────────────────────── */
+
+.anim-fade-up    { animation: fadeUp      0.42s var(--ease-out)    both; }
+.anim-fade-down  { animation: fadeDown    0.38s var(--ease-out)    both; }
+.anim-fade-in    { animation: fadeIn      0.28s ease               both; }
+.anim-scale-in   { animation: scaleIn     0.32s var(--ease-out)    both; }
+.anim-scale-bounce { animation: scaleInBounce 0.45s var(--ease-spring) both; }
+.anim-slide-down { animation: slideDown   0.26s var(--ease-out)    both; }
+.anim-slide-up   { animation: slideUp     0.26s var(--ease-out)    both; }
+.anim-slide-left { animation: slideLeft   0.30s var(--ease-out)    both; }
+.anim-card       { animation: cardEntrance 0.38s var(--ease-out)   both; }
+.anim-spin       { animation: spin        1.0s  linear             infinite; }
+.anim-shake      { animation: shake       0.42s ease; }
+.anim-flicker    { animation: flicker     2.4s  ease               infinite; }
+
+/* ── Delay utilities ─────────────────────────────────────────────────────── */
+.d-0   { animation-delay: 0ms;   }
+.d-50  { animation-delay: 50ms;  }
+.d-100 { animation-delay: 100ms; }
+.d-150 { animation-delay: 150ms; }
+.d-200 { animation-delay: 200ms; }
+.d-250 { animation-delay: 250ms; }
+.d-300 { animation-delay: 300ms; }
+.d-350 { animation-delay: 350ms; }
+.d-400 { animation-delay: 400ms; }
+.d-500 { animation-delay: 500ms; }
+.d-600 { animation-delay: 600ms; }
+.d-700 { animation-delay: 700ms; }
+
+/* ── Stagger helpers (for lists) ─────────────────────────────────────────── */
+/* Apply .stagger-list to the parent, children get staggered automatically */
+.stagger-list > *:nth-child(1)  { animation-delay: 30ms;  }
+.stagger-list > *:nth-child(2)  { animation-delay: 70ms;  }
+.stagger-list > *:nth-child(3)  { animation-delay: 110ms; }
+.stagger-list > *:nth-child(4)  { animation-delay: 150ms; }
+.stagger-list > *:nth-child(5)  { animation-delay: 190ms; }
+.stagger-list > *:nth-child(6)  { animation-delay: 230ms; }
+.stagger-list > *:nth-child(7)  { animation-delay: 270ms; }
+.stagger-list > *:nth-child(8)  { animation-delay: 310ms; }
+.stagger-list > *:nth-child(n+9){ animation-delay: 340ms; }
+
+/* ── Hover transitions ───────────────────────────────────────────────────── */
+.hover-lift {
+  transition: transform 0.20s var(--ease-out), box-shadow 0.20s var(--ease-out);
+}
+.hover-lift:hover {
+  transform:  translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.hover-scale {
+  transition: transform 0.18s var(--ease-spring);
+}
+.hover-scale:hover  { transform: scale(1.04); }
+.hover-scale:active { transform: scale(0.97); }
+
+.hover-dim {
+  transition: opacity 0.15s ease;
+}
+.hover-dim:hover { opacity: 0.75; }
+
+/* ── Reduced motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration:   0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration:  0.01ms !important;
+  }
+}
