@@ -1,76 +1,118 @@
-dealapp/                          ← root folder (your project name)
-│
-├── backend/                      ← Express API server
-│   ├── middleware/
-│   │   └── auth.js               ← JWT + scraper secret verification
-│   ├── models/
-│   │   ├── Deal.js               ← MongoDB deal schema
-│   │   └── User.js               ← MongoDB user schema
-│   ├── routes/
-│   │   ├── auth.js               ← /api/auth/* (login, register, me)
-│   │   ├── deals.js              ← /api/deals/* (get, post, vote, submit)
-│   │   └── users.js              ← /api/users/* (saved deals)
-│   ├── .env.example              ← environment variable template
-│   ├── package.json
-│   └── server.js                 ← Express entry point
-│
-├── frontend/                     ← React app
-│   ├── public/
-│   │   └── index.html
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── deals/
-│   │   │   │   ├── DealCard.js       ← main deal card (the hero component)
-│   │   │   │   ├── DealCard.css      ← card-specific styles
-│   │   │   │   ├── DealFeed.js       ← infinite scroll feed
-│   │   │   │   └── DealDetail.js     ← expanded single deal view
-│   │   │   ├── layout/
-│   │   │   │   ├── Header.js         ← sticky nav + search
-│   │   │   │   ├── Sidebar.js        ← filters sidebar
-│   │   │   │   └── Footer.js         ← simple footer
-│   │   │   └── ui/
-│   │   │       ├── Badge.js          ← discount/store/source badges
-│   │   │       ├── Skeleton.js       ← loading skeletons
-│   │   │       ├── Toast.js          ← notification system
-│   │   │       ├── Ticker.js         ← live deal ticker strip
-│   │   │       ├── SearchBar.js      ← search with suggestions
-│   │   │       └── EmptyState.js     ← empty/error states
-│   │   ├── hooks/
-│   │   │   ├── useDeals.js           ← data fetching + infinite scroll
-│   │   │   ├── useSearch.js          ← debounced search
-│   │   │   ├── useFilters.js         ← filter state management
-│   │   │   └── useLocalStorage.js    ← persist preferences
-│   │   ├── pages/
-│   │   │   ├── Home.js               ← main feed page
-│   │   │   ├── DealPage.js           ← single deal page
-│   │   │   ├── SavedDeals.js         ← user's saved deals
-│   │   │   ├── SubmitDeal.js         ← community submission form
-│   │   │   ├── Login.js
-│   │   │   └── Register.js
-│   │   ├── store/
-│   │   │   └── authStore.js          ← Zustand global auth state
-│   │   ├── styles/
-│   │   │   ├── global.css            ← design tokens + base styles
-│   │   │   ├── animations.css        ← all keyframes + transitions
-│   │   │   └── utilities.css         ← helper classes
-│   │   ├── utils/
-│   │   │   ├── api.js                ← axios instance + all API calls
-│   │   │   ├── helpers.js            ← formatPrice, timeAgo, etc.
-│   │   │   └── constants.js          ← categories, stores, colors
-│   │   ├── App.js                    ← root component + routing
-│   │   └── index.js                  ← React entry point
-│   ├── .env.example
-│   └── package.json
-│
-├── scraper/                      ← Deal scraper (Node.js)
-│   ├── index.js                  ← entry — boots all scrapers
-│   ├── telegram.js               ← Telegram MTProto listener
-│   ├── reddit.js                 ← Reddit polling loop
-│   ├── parser.js                 ← zero-dependency regex parser
-│   ├── apiClient.js              ← posts deals to backend
-│   ├── .env.example
-│   └── package.json
-│
-├── .gitignore
-├── README.md                     ← setup instructions
-└── DEPLOY.md                     ← step-by-step deployment guide
+# ProteinHunt
+
+ProteinHunt is a full-stack deal aggregation platform that fetches protein supplement deals from Reddit, processes them using an AI-powered parsing layer, and displays structured, filterable deal listings in real time.
+
+The system combines external API ingestion, AI-based data normalization, authentication, and community-driven voting into a scalable web application.
+
+---
+
+## 🚀 Core Features
+
+- Automated deal ingestion using Reddit API
+- AI-powered deal parsing using Groq AI agent
+- Real-time deal listing updates
+- User authentication & authorization
+- Community-driven upvoting system
+- Manual deal submission support
+- Advanced filtering & sorting
+- MongoDB-backed persistence layer
+
+---
+
+## 🏗 System Architecture
+
+### Data Pipeline
+
+1. Fetch raw deal posts from Reddit API
+2. Send unstructured content to Groq AI agent
+3. Parse and normalize deal metadata (price, product, discount, link)
+4. Store structured deal objects in MongoDB
+5. Serve processed deals to frontend via REST APIs
+
+This ensures raw, inconsistent Reddit content is transformed into usable structured deal data.
+
+---
+
+## 🔐 Authentication & User Actions
+
+- JWT-based authentication
+- Protected routes for deal submission
+- User-specific actions (add deals, upvote deals)
+- Vote tracking to prevent duplicate votes
+- Role-aware backend validation
+
+---
+
+## ⚡ Real-Time & Interaction Features
+
+- Live deal updates without page reload
+- Instant upvote count updates
+- Filter by price range, popularity, and recency
+- Optimized MongoDB queries for fast retrieval
+
+---
+
+## 🧠 AI Integration
+
+- Integrated Groq AI agent for natural language parsing
+- Extracts structured fields from unstructured Reddit posts
+- Handles inconsistent formatting and incomplete deal descriptions
+- Reduces manual data cleaning effort
+
+This layer bridges the gap between scraped content and structured e-commerce-style listings.
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- React.js
+- Tailwind CSS
+- Axios
+- React Router
+
+### Backend
+- Node.js
+- Express.js
+- REST APIs
+- JWT Authentication
+
+### Database
+- MongoDB
+- Mongoose
+
+### AI / External Services
+- Reddit API
+- Groq AI API
+
+### Deployment
+- Vercel (Frontend)
+- Backend deployed separately (if applicable)
+
+---
+
+## 🌐 Live Demo
+
+Live: https://proteinHunt.vercel.app  
+GitHub: https://github.com/fiercfly/proteinHunt  
+
+---
+
+## 📦 Installation
+
+```bash
+npm install
+npm run dev
+```
+
+## 🧠 Technical Challenges Solved
+
+- Converting unstructured Reddit text into structured deal objects
+
+- Preventing duplicate upvotes and vote manipulation
+
+- Designing scalable API endpoints for filtering and sorting
+
+- Managing authentication state securely
+
+- Optimizing MongoDB queries for real-time responsiveness
